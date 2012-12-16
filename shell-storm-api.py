@@ -22,7 +22,7 @@ import httplib
 
 class ShellStorm():
     def __init__(self):
-        self._addr = "http://www.shell-storm.org/api/?s="
+        pass
 
     def searchShellcode(self, keyword):
         try:
