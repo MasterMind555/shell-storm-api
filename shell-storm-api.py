@@ -44,11 +44,17 @@ class ShellStorm():
                          'ScArch': desc[1],
                          'ScTitle': desc[2],
                          'ScId': desc[3],
-                         'ScUrl': desc[4]
+                         'ScUrl': desc[4],
+                         'ScSize': int(desc[2][-11:-6]) 
                        }
                 data_dl.append(dico)
             except:
                 pass
+        
+        try:
+            return sorted(data_dl, key=lambda x: x['ScSize'])
+        except Exception:
+            print("Could not sort by size")
 
         return data_dl
 
