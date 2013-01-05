@@ -36,23 +36,35 @@ class ShellStorm():
             return None
 
         data_dl = []
-        for data in data_l:
+        for data in data_l: 
             try:
                 desc = data.split("::::")
-                dico = {
-                         'ScAuthor': desc[0],
-                         'ScArch': desc[1],
-                         'ScTitle': desc[2],
-                         'ScId': desc[3],
-                         'ScUrl': desc[4],
-                         'ScSize': int(desc[2][-11:-6]) 
-                       }
+                try:
+                    dico = {
+                             'ScAuthor': desc[0],
+                             'ScArch': desc[1],
+                             'ScTitle': desc[2],
+                             'ScId': desc[3],
+                             'ScUrl': desc[4],
+                             'ScSize': int(''.join(x for x in desc[2][-10:-5] if x.isdigit()))
+                           }
+                except Exception:
+                    dico = {
+                             'ScAuthor': desc[0],
+                             'ScArch': desc[1],
+                             'ScTitle': desc[2],
+                             'ScId': desc[3],
+                             'ScUrl': desc[4],
+                             'ScSize': 0
+                           }
+                    
+                    
                 data_dl.append(dico)
             except:
                 pass
         
         try:
-            return sorted(data_dl, key=lambda x: x['ScSize'])
+            return sorted(data_dl, key=lambda x: x['ScSize'], reverse=True)
         except Exception:
             print("Could not sort by size")
 
